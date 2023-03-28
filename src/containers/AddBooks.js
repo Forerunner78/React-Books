@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import { addBook } from "../redux/actions/actionAddBooks";
+import { deleteBook } from "../redux/actions/actionAddBooks";
 import FlipMove from "react-flip-move";
 
-const AddBooks = ({ libraryData, addBook }) => {
+const AddBooks = ({ libraryData, addBook, deleteBook }) => {
     const initialState = { title: "", author: "" };
     const [newData, setNewData] = useState(initialState);
 
@@ -32,7 +33,9 @@ const AddBooks = ({ libraryData, addBook }) => {
                                 <strong>Auteur: </strong>
                                 {data.author}
                             </span>
-                            <span className="btn btn-danger">X</span>
+                            <span className="btn btn-danger" onClick={() => deleteBook(data.id)}>
+                                X
+                            </span>
                         </li>
                     );
                 })}
@@ -42,8 +45,8 @@ const AddBooks = ({ libraryData, addBook }) => {
         );
 
     const deleteAllBooksBtn = libraryData.length > 0 && (
-        <div className="d-flex justify-content-center">
-            <button className="btn btn-danger mb-5">Effacer tous les livres</button>
+        <div className="d-flex justify-content-center m-5">
+            <button className="btn btn-danger">Effacer tous les livres</button>
         </div>
     );
 
@@ -87,7 +90,6 @@ const AddBooks = ({ libraryData, addBook }) => {
                     <div className="col-md-12">
                         <ul className="list-group">{displayData}</ul>
                     </div>
-
                     {deleteAllBooksBtn}
                 </div>
             </div>
@@ -102,7 +104,10 @@ const addStateToProps = (state) => {
 };
 
 const addDispatchToProps = (dispatch) => {
-    return { addBook: (param) => dispatch(addBook(param)) };
+    return {
+        addBook: (param) => dispatch(addBook(param)),
+        deleteBook: (id) => dispatch(deleteBook(id)),
+    };
 };
 
 export default connect(addStateToProps, addDispatchToProps)(AddBooks);
