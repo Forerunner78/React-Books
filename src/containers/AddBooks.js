@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { addBook } from "../redux/actions/actionAddBooks";
 
 const AddBooks = ({ libraryData, addBook }) => {
-    console.log(libraryData);
     const initialState = { title: "", author: "" };
     const [newData, setNewData] = useState(initialState);
 
@@ -11,14 +10,44 @@ const AddBooks = ({ libraryData, addBook }) => {
         e.preventDefault();
         addBook(newData);
 
-        //Vider le input
+        // Vider le input
         setNewData(initialState);
     };
 
+    const displayData =
+        libraryData.length > 0 ? (
+            libraryData.map((data) => {
+                return (
+                    <li
+                        key={data.id}
+                        className="list-group-item list-group-item-light d-flex justify-content-between m-5"
+                    >
+                        <span>
+                            <strong>Titre: </strong>
+                            {data.title}
+                        </span>
+                        <span>
+                            <strong>Auteur: </strong>
+                            {data.author}
+                        </span>
+                        <span className="btn btn-danger">X</span>
+                    </li>
+                );
+            })
+        ) : (
+            <p className="text-center">Aucune data a afficher</p>
+        );
+
+    const deleteAllBooksBtn = libraryData.length > 0 && (
+        <div className="d-flex justify-content-center">
+            <button className="btn btn-danger mb-5">Effacer tous les livres</button>
+        </div>
+    );
+
     return (
         <main role="main">
-            <div className="jumbotron jumbotron-fluid">
-                <div className="container text-center">
+            <div className="jumbotron jumbotron-fluid bg-light m-5">
+                <div className="container text-center p-5">
                     <h1 className="display-4">BOOKS</h1>
                     <p>Ajouter un livre à votre bibliothèque</p>
                     <form className="row g-3 justify-content-center" onSubmit={handleSubmit}>
@@ -50,17 +79,13 @@ const AddBooks = ({ libraryData, addBook }) => {
                     </form>
                 </div>
             </div>
-            <div className="container" style={{ minHeight: "200px" }}></div>
-            <div className="row">
-                <div className="col-md-12">
-                    <ul className="list-group">
-                        <li className="list-group-item list-group-item-light d-flex justify-content-between m-5">
-                            Livres enregistrés:
-                        </li>
-                    </ul>
-                </div>
-                <div className="d-flex justify-content-center">
-                    <button className="btn btn-danger mb-5">Effacer tous les livres</button>
+            <div className="container" style={{ minHeight: "200px" }}>
+                <div className="row">
+                    <div className="col-md-12">
+                        <ul className="list-group">{displayData}</ul>
+                    </div>
+
+                    {deleteAllBooksBtn}
                 </div>
             </div>
         </main>
