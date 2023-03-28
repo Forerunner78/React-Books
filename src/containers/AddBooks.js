@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { addBook } from "../redux/actions/actionAddBooks";
-import { deleteBook } from "../redux/actions/actionAddBooks";
+import { addBook, deleteBook, deleteAllBooks } from "../redux/actions/actionAddBooks";
 import FlipMove from "react-flip-move";
 
-const AddBooks = ({ libraryData, addBook, deleteBook }) => {
+const AddBooks = ({ libraryData, addBook, deleteBook, deleteAll }) => {
     const initialState = { title: "", author: "" };
     const [newData, setNewData] = useState(initialState);
 
@@ -46,7 +45,9 @@ const AddBooks = ({ libraryData, addBook, deleteBook }) => {
 
     const deleteAllBooksBtn = libraryData.length > 0 && (
         <div className="d-flex justify-content-center m-5">
-            <button className="btn btn-danger">Effacer tous les livres</button>
+            <button className="btn btn-danger" onClick={() => deleteAll()}>
+                Effacer tous les livres
+            </button>
         </div>
     );
 
@@ -107,6 +108,7 @@ const addDispatchToProps = (dispatch) => {
     return {
         addBook: (param) => dispatch(addBook(param)),
         deleteBook: (id) => dispatch(deleteBook(id)),
+        deleteAll: () => dispatch(deleteAllBooks()),
     };
 };
 
