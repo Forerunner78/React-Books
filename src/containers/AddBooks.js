@@ -1,25 +1,38 @@
+import { useState } from "react";
+
 const AddBooks = () => {
+    const initialState = { title: "", author: "" };
+    const [newData, setNewData] = useState(initialState);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+
     return (
         <main role="main">
             <div className="jumbotron jumbotron-fluid">
                 <div className="container text-center">
                     <h1 className="display-4">BOOKS</h1>
                     <p>Ajouter un livre à votre bibliothèque</p>
-                    <form className="row g-3 justify-content-center">
+                    <form className="row g-3 justify-content-center" onSubmit={handleSubmit}>
                         <div className="col-auto">
                             <input
+                                value={newData.title}
                                 type="text"
                                 className="form-control"
                                 placeholder="Titre"
                                 required
+                                onChange={(e) => setNewData({ ...newData, title: e.target.value })}
                             />
                         </div>
                         <div className="col-auto">
                             <input
+                                value={newData.author}
                                 type="text"
                                 className="form-control ml-3"
                                 placeholder="Auteur"
                                 required
+                                onChange={(e) => setNewData({ ...newData, author: e.target.value })}
                             />
                         </div>
                         <div className="col-auto">
