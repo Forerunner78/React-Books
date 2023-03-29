@@ -1,17 +1,26 @@
+import { useState } from "react";
+
 const SearchBooks = () => {
+    const [title, setTitle] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
     return (
         <main role="main">
             <div className="jumbotron jumbotron-fluid bg-light m-5">
                 <div className="container text-center p-5">
                     <h1 className="display-4">BOOKS</h1>
                     <p>Indiquez le sujet du livre à rechercher sur Google API</p>
-                    <form className="row g-3 justify-content-center">
+                    <form className="row g-3 justify-content-center" onSubmit={handleSubmit}>
                         <div className="col-auto">
                             <input
+                                value={title}
                                 type="text"
                                 className="form-control"
                                 placeholder="Quoi rechercher ?"
                                 required
+                                onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
                         <div className="col-auto">
