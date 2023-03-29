@@ -40,7 +40,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAll }) => {
                 })}
             </FlipMove>
         ) : (
-            <p className="text-center">Aucune data a afficher</p>
+            <p className="text-center">Aucune data à afficher</p>
         );
 
     const deleteAllBooksBtn = libraryData.length > 0 && (
