@@ -99,7 +99,7 @@ const SearchBooks = () => {
             <div className="jumbotron jumbotron-fluid bg-light m-5">
                 <div className="container text-center p-5">
                     <h1 className="display-4">BOOKS</h1>
-                    <p>Indiquez le sujet du livre à rechercher sur Google API</p>
+                    <p>Indiquez le titre du livre à rechercher sur Google</p>
                     <form className="row g-3 justify-content-center" onSubmit={handleSubmit}>
                         <div className="col-auto">
                             <input
