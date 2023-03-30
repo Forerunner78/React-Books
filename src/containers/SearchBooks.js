@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBooks } from "../redux/actions/actionFetchBooks";
+import { addBook } from "../redux/actions/actionAddBooks";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SearchBooks = () => {
     const [title, setTitle] = useState("");
@@ -10,6 +13,21 @@ const SearchBooks = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(fetchBooks(title));
+    };
+
+    const handleSave = (title, author) => {
+        const bookToSave = { title, author };
+        dispatch(addBook(bookToSave));
+        toast.info("Livre enregistré", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
     };
 
     const displayFetchedBooks = state.isLoading ? (
@@ -52,12 +70,20 @@ const SearchBooks = () => {
                             <a
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="btn btn-outline-secondary"
+                                className="btn btn-outline-secondary me-3"
                                 href={data.volumeInfo.previewLink}
                             >
                                 Plus d'infos
                             </a>
-                            <button className="btn btn-outline-secondary">Enregistrer</button>
+                            <button
+                                className="btn btn-outline-secondary"
+                                onClick={() =>
+                                    handleSave(data.volumeInfo.title, data.volumeInfo.authors)
+                                }
+                            >
+                                Enregistrer
+                            </button>
+                            <ToastContainer />
                         </div>
                     </div>
                 </div>

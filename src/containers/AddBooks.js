@@ -24,15 +24,18 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAll }) => {
                             key={data.id}
                             className="list-group-item list-group-item-light d-flex justify-content-between"
                         >
-                            <span>
+                            <span className="col-6">
                                 <strong>Titre: </strong>
                                 {data.title}
                             </span>
-                            <span>
+                            <span className="col-5">
                                 <strong>Auteur: </strong>
                                 {data.author}
                             </span>
-                            <span className="btn btn-danger" onClick={() => deleteBook(data.id)}>
+                            <span
+                                className="btn btn-danger col"
+                                onClick={() => deleteBook(data.id)}
+                            >
                                 X
                             </span>
                         </li>
