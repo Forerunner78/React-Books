@@ -14,8 +14,12 @@ const SearchBooks = () => {
 
     const displayFetchedBooks = state.isLoading ? (
         <div className="d-flex justify-content-center">
-            <div className="spinner-border text-info" role="status">
-                <span className="sr-only">Loading ...</span>
+            <div
+                className="spinner-border text-info"
+                style={{ width: "3rem", height: "3rem" }}
+                role="status"
+            >
+                <span className="sr-only"></span>
             </div>
         </div>
     ) : state.error !== "" ? (
