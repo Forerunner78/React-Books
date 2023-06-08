@@ -55,7 +55,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAll }) => {
     );
 
     return (
-        <main role="main">
+        <main role="main" style={{ minHeight: "79.5vh" }}>
             <div className="jumbotron jumbotron-fluid bg-light m-5">
                 <div className="container text-center p-5">
                     <h1 className="display-4">BOOKS</h1>
